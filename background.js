@@ -72,6 +72,20 @@ function blackListSite(newURL) {
     }
 }
 
+/**
+ * @param {string} newURL - string of website URL to be removed from blackList
+ */
+function removeBlackListSite(TheURL) {
+    // Removes a procrastination site from the blackList
+    // Alerts error message if input URL string not in blackList
+    var index = blackList.indexOf(TheURL);
+    if (index > -1) {
+        blackList.splice(index, 1);
+    } else {
+        alert("Failed to find blackListed site. Please try again.")
+    }
+}
+
 // blackList - Array of strings of procrastination site URLs
 var blackList = ["https://www.youtube.com/", "https://twitter.com/", "https://www.netflix.com/",
                  "https://www.twitch.tv/", "https://www.facebook.com/", "https://www.instagram.com/"]

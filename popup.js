@@ -2,20 +2,20 @@
 // Coded by Alex Snow :3
 // Handles stopWatch, manipulation of alarms, and main run() function
 
-var sec = 0;
+var timeElapsed = 0;
+// time elapsed in seconds
 
 var stopWatch = {
-    seconds: sec % 60,
-    minutes: sec / 60,
-    hours: minutes / 60,
-    days: hours / 24
+    seconds: timeElapsed % 60,
+    minutes: (timeElapsed / 60) % 60,
+    hours: ((timeElapsed / 60) / 24)
 };
 
 
 var alarms = [
     // [days, hours, minutes, seconds]
-    [0, 0, 0, 30], [0, 0, 1, 0]
-    [0, 0, 1, 30], [0, 0, 2, 0]
+    [0, 0, 30], [0, 1, 0]
+    [0, 1, 30], [0, 2, 0]
 ];
 
 /**
@@ -23,17 +23,13 @@ var alarms = [
  *   [days, hours, minutes, seconds]
  */
 function removeAlarm(alarmTime) {
-    // Loops through alarms array to find and remove input alarm Time.
-    // Alerts error message if loop failed to delete an alarm time.
-    var q = false;
-    for (i = 0; i < alarms.length; i++) {
-        if (alarmTime == alarms[i]) {
-            q = true;
-            delete alarms[i];
-        }
-    }
-    if (q == false) {
-        alert("Failed to delete alarm time, please try again.")
+    // Searches through alarms array to find and remove input alarm Time.
+    // Alerts error message if input alarm time isn't in alarms array.
+    var index = alarms.indexOf(alarmTime);
+    if (index > -1) {
+        blackList.splice(index, 1);
+    } else {
+        alert("Failed to find alarm time. Please try again.")
     }
 }
 
@@ -52,16 +48,13 @@ function addAlarm(alarmTime) {
  */
 function myTimer(stopWatch) {
     // Increments seconds variable by 1
-    sec++;
-    for (i = 0; i < alarms.length; i++) {
-        var currentTime = [stopWatch.days, stopWatch.hours,
-                           stopWatch.minutes, stopWatch.seconds];
-        // Prints alert message if stopWatch reaches an alarm
-        if (currentTime == alarms[i]) {
-            alert("You have been procrastinating for: " + currentTime[0]
-                  + " day(s), " + currentTime[1] + " hour(s), " + currentTime[2]
-                  + " minute(s), and " + currentTime[3] + " second(s) :(");
-        }
+    timeElapsed++;
+    var currentTime = [stopWatch.hours, stopWatch.minutes, stopWatch.seconds];
+    var index = alarms.indexOf(currentTime);
+    // Prints alert message if stopWatch reaches an alarm
+    if (index > -1) {
+        alert("You have been procrastinating for: " + currentTime[0] + " hour(s), " 
+              + currentTime[1]+ " minute(s), and " + currentTime[2] + " second(s) :(");
     }
 }
 
