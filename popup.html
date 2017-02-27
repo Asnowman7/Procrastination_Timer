@@ -21,17 +21,34 @@
       }
     </style>
 
-    <script src="background.js"></script>
-    <script src="popup.js"></script>
   </head>
   <body>
       <h1>Procrastination Timer</h1>
-      <div id="clock"></div>
       <script>
-          var sec = 
-          document.getElementById("clock").innerHTML = stopWatch;
+          var newBlackListSite = document.getElementById('newSite');
+          var newAlarm = document.getElementById("newalarm");
+          document.getElementById("hours").innerHTML = stopWatch.hours;
+          document.getElementById("minutes").innerHTML = stopWatch.minutes;
+          document.getElementById("seconds").innerHTML = stopWatch.seconds;
       </script>
-      <p id="clock"></p>
+      <p id="hours"></p><p>hours</p><p id="minutes"></p><p>minutes</p><p id="seconds"></p><p>seconds</p>
+
+      <table id="changeBlackList">
+          <tr>
+              <td><label>New Procrastination Site</label></td>
+          </tr>
+          <tr>
+              <td colspan="2"><input class="textBox" id="newSite" type="text" maxlength="200" required /></td>
+          </tr>
+          <tr>
+              <td><input type="button" class="loginButtons" value="Add Site" 
+                     onclick="chrome.extension.getBackgroundPage().newBlackListSite(newBlackListSite)" />
+              <input type="button" class="loginButtons" value="Remove Site"
+                     onclick="chrome.extension.getBackgroundPage().newBlackListSite(removeBlackListSite)" /></td>
+      </table>
+
+      <script src="background.js"></script>
+      <script src="popup.js"></script>
 </body>
 </html>
 
