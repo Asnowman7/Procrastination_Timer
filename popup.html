@@ -26,13 +26,23 @@
       <h1>Procrastination Timer</h1>
       <script>
           var newBlackListSite = document.getElementById('newSite');
-          var newAlarm = document.getElementById("newalarm");
-          document.getElementById("hours").innerHTML = stopWatch.hours;
-          document.getElementById("minutes").innerHTML = stopWatch.minutes;
-          document.getElementById("seconds").innerHTML = stopWatch.seconds;
+          var newAlarm = document.getElementById("newAlarm");
       </script>
-      <p id="hours"></p><p>hours</p><p id="minutes"></p><p>minutes</p><p id="seconds"></p><p>seconds</p>
-
+      <input id="stopWatchSwitch" type="button" value="Start Timer" onclick="stopWatchSwitch();" />
+      <div id="clockRepr">
+          <div>
+              <span class="hours"></span>
+              <div class="smalltext">Hours</div>
+          </div>
+          <div>
+              <span class="minutes"></span>
+              <div class="smalltext">Minutes</div>
+          </div>
+          <div>
+              <span class="seconds"></span>
+              <div class="smalltext">Seconds</div>
+          </div>
+      </div>
       <table id="changeBlackList">
           <tr>
               <td><label>New Procrastination Site</label></td>

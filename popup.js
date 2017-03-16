@@ -6,11 +6,33 @@ var timeElapsed = 0;
 // time elapsed in seconds
 
 var stopWatch = {
-    seconds: timeElapsed % 60,
-    minutes: (timeElapsed / 60) % 60,
-    hours: ((timeElapsed / 60) / 24)
+    //A "clock" object that contains variables to record seconds,
+    //minutes, hours, and days.
+    seconds: 0,
+    minutes: 0,
+    hours: 0,
 };
 
+/**
+ * @param {integer(timePassed)} timePassed - The amount of time elapsed in seconds.
+ */
+function updateStopWatch(timePassed) {
+    // Updates stopWatch object according to timePassed parameter.
+    stopWatch.seconds = Math.floor(timePassed % 60);
+    stopWatch.minutes = Math.floor((timePassed / 60) % 60);
+    stopWatch.hours = Math.floor(((timePassed / 60) / 24));
+    secondsSpan.innerHTML = stopWatch.seconds;
+    minutesSpan.innerHTML = stopWatch.minutes;
+    hoursSpan.innerHTML = stopWatch.hours;
+}
+
+function clockInit(id) {
+    var clock = document.getElementById(id);
+    var hoursSpan = clock.querySelector('.hours');
+    var minutesSpan = clock.querySelector('.minutes');
+    var secondsSpan = clock.querySelector('.seconds');
+    updateStopWatch(timeElapsed);
+}
 
 var alarms = [
     // [days, hours, minutes, seconds]
@@ -46,12 +68,16 @@ function addAlarm(alarmTime) {
  * @param {object(stopWatch)} stopWatch - A "clock" object that contains variables to record seconds,
  *   minutes, hours, and days.
  */
-function myTimer(stopWatch) {
-    // Increments seconds variable by 1
+function myTimer() {
+    // Increments seconds variable by 1, updates stopWatch and prints
+    // alert message if stopWatch reaches an alarm.
     timeElapsed++;
+    updateStopWatch(timeElapsed);
+    //clock.innerHTML = 'hours: ' + stopWatch.hours + '<br>' +
+      //                'minutes: ' + stopWatch.minutes + '<br>' +
+        //              'seconds: ' + stopWatch.seconds;
     var currentTime = [stopWatch.hours, stopWatch.minutes, stopWatch.seconds];
     var index = alarms.indexOf(currentTime);
-    // Prints alert message if stopWatch reaches an alarm
     if (index > -1) {
         alert("You have been procrastinating for: " + currentTime[0] + " hour(s), " 
               + currentTime[1]+ " minute(s), and " + currentTime[2] + " second(s) :(");
@@ -59,7 +85,7 @@ function myTimer(stopWatch) {
 }
 
 // run() function while loop condition
-var y = true;
+var y = false;
 
 function stopWatchSwitch() {
     // Allows the user to manually stop the clock and exit run()'s infinite loop
@@ -101,5 +127,5 @@ function run() {
 }
 
 
-// executing run
-run();
+// initializing clock
+clockInit('clockRepr');
